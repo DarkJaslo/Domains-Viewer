@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+using namespace std;
 
 class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 {
@@ -16,7 +17,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     ~MyGLWidget ();
     
   protected:
-    // initializeGL - Aqui incluim les inicialitzacions del contexte grafic.
+    // initializeGL - Aqui incluim les inicialitzacions del context grafic.
     virtual void initializeGL ();
 
     // paintGL - Mètode cridat cada cop que cal refrescar la finestra.
@@ -30,6 +31,10 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     virtual void keyPressEvent (QKeyEvent *event);
 
   private:
+
+    void readBoards();
+
+    void creaBuffersDibuix();
     void creaBuffersQuadrat();
     void creaBuffersJugador();
     
@@ -40,7 +45,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void iniCamera();
     
     void modelTransformQuadrat(glm::vec3 posicio);
-    void pintaQuadrat(glm::vec3 posicio, glm::vec3 color);
+    void modelTransformJugador(glm::vec3 posicio);
+    void pintaQuadrat(glm::vec3 posicio, glm::vec4 color);
+    void pintaJugador(glm::vec3 posicio, glm::vec4 color);
     void drawFilledCircle(GLfloat x, GLfloat y, GLfloat radius);
     
     // program
@@ -55,7 +62,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLuint viewLoc;
 
     // VAOs
-    GLuint VAOQuadrat,VAOjugador;
+    GLuint VAOdibuix,VAOQuadrat,VAOjugador;
 
     // viewport
     GLint ample, alt;
@@ -69,18 +76,23 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec3 OBS,VRP,UP; 
     
     // colors
-    glm::vec3 cols[4] = {
+    glm::vec3 colors[4] = {
       glm::vec3(255.0/255.0,105.0/255.0,180.0/255.0),
       glm::vec3(200.0/255.0,162.0/255.0,200.0/255.0),
       glm::vec3(255.0/255.0,215.0/255.0,0.0/255.0),
       glm::vec3(0.0/255.0,255.0/255.0,255.0/255.0)
     };
-    glm::vec3 blancTauler = glm::vec3(233.0/255.0,216.0/255.0,170.0/255.0);
-    glm::vec3 negreTauler = glm::vec3(63.0/255.0,56.0/255.0,50.0/255.0);
-    glm::vec3 blanc = glm::vec3(1.0);
-    glm::vec3 negre = glm::vec3(0.0);    
+    glm::vec4 blanc = glm::vec4(1.0f,1.0f,1.0f,1.0f);
+    glm::vec4 negre = glm::vec4(0.0f,0.0f,0.0f,1.0f);
 
-    // posicio cavall blanc
-    glm::vec3 posNegre = glm::vec3(0.125, 0.125, 0.0);
-    glm::vec3 posBlanc = glm::vec3(-0.125,-0.375,0.0);
+    //control
+
+    int rounds,cols,rows;
+    int currentRound;
+    struct Square{
+      int painter;
+      int drawer;
+      int unit;
+    };
+    std::vector<std::vector<std::vector<Square>>> boards;
 };
