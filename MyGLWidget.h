@@ -17,38 +17,36 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     ~MyGLWidget ();
     
   protected:
-    // initializeGL - Aqui incluim les inicialitzacions del context grafic.
+    // initializeGL - Is executed once at the beggining
     virtual void initializeGL ();
 
-    // paintGL - Mètode cridat cada cop que cal refrescar la finestra.
-    // Tot el que es dibuixa es dibuixa aqui.
+    // paintGL - Is called every time the window is updated
     virtual void paintGL ();
  
-    // resize - Es cridat quan canvia la mida del widget
+    // resize - Is called when the window's size changes
     virtual void resizeGL (int width, int height);  
 
-    // keyPressEvent - Es cridat quan es prem una tecla
+    // keyPressEvent - Is called when a key is pressed
     virtual void keyPressEvent (QKeyEvent *event);
 
   private:
 
     void readBoards();
 
-    void creaBuffersDibuix();
-    void creaBuffersQuadrat();
-    void creaBuffersJugador();
+    void createBuffersDrawing();
+    void createBuffersSquare();
+    void createBuffersPlayer();
     
-    void carregaShaders();
+    void loadShaders();
 
     void viewTransform();
     void projectTransform();
     void iniCamera();
     
-    void modelTransformQuadrat(glm::vec3 posicio);
-    void modelTransformJugador(glm::vec3 posicio);
-    void pintaQuadrat(glm::vec3 posicio, glm::vec4 color);
-    void pintaJugador(glm::vec3 posicio, glm::vec4 color);
-    void drawFilledCircle(GLfloat x, GLfloat y, GLfloat radius);
+    void modelTransformSquare(glm::vec3 pos);
+    void modelTransformPlayer(glm::vec3 pos);
+    void paintSquare(glm::vec3 pos, glm::vec4 color);
+    void paintPlayer(glm::vec3 pos, glm::vec4 color);
     
     // program
     QOpenGLShaderProgram *program;
@@ -62,16 +60,12 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLuint viewLoc;
 
     // VAOs
-    GLuint VAOdibuix,VAOQuadrat,VAOjugador;
+    GLuint VAODrawing,VAOSquare,VAOPlayer;
 
     // viewport
-    GLint ample, alt;
+    GLint width, height;
 
-    // escala escena
-    GLfloat scl = 1.0;
-    GLfloat angle = 0.0;
-
-    //camera
+    // camera
     GLfloat left,right,up,down,znear,zfar;
     glm::vec3 OBS,VRP,UP; 
     
@@ -82,11 +76,10 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
       glm::vec3(255.0/255.0,215.0/255.0,0.0/255.0),
       glm::vec3(0.0/255.0,255.0/255.0,255.0/255.0)
     };
-    glm::vec4 blanc = glm::vec4(1.0f,1.0f,1.0f,1.0f);
-    glm::vec4 negre = glm::vec4(0.0f,0.0f,0.0f,1.0f);
+    glm::vec4 white = glm::vec4(1.0f,1.0f,1.0f,1.0f);
+    glm::vec4 black = glm::vec4(0.0f,0.0f,0.0f,1.0f);
 
     //control
-
     int rounds,cols,rows;
     int currentRound;
     struct Square{
@@ -94,5 +87,5 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
       int drawer;
       int unit;
     };
-    std::vector<std::vector<std::vector<Square>>> boards;
+    vector<vector<vector<Square>>> boards;
 };
