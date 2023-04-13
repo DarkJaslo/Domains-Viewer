@@ -99,14 +99,15 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
 void MyGLWidget::readBoards()
 {
   cin >> rounds >> rows >> cols;
+  ++rounds;
   boards = vector<vector<vector<Square>>>(rounds,vector<vector<Square>>(rows,vector<Square>(cols)));
   for(int i = 0; i < rounds; ++i){
     int r;
     cin >> r;
-    if(r != i){
+    /*if(r != i){
       cerr << "Incorrect input round: expected " << i << " and got " << r << endl;
       exit(1); 
-    }
+    }*/
     for(int j = 0; j < rows; ++j){
       for(int k = 0; k < cols; ++k){
         cin >> boards[i][j][k].painter >> boards[i][j][k].drawer >> boards[i][j][k].unit;
