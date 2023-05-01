@@ -148,11 +148,9 @@ void MyGLWidget::iniCamera()
   left = -25.0;  right = 25.0;
   up = -25.0;  down = 25.0;
   znear = 0.1;  zfar = 1.1;
-  //OBS = glm::vec3(25.0,25.0,1.0);
-  OBS = glm::vec3(0.0,0.0,1.0);
-  //VRP = glm::vec3(25.0,25.0,0.0);
+  OBS = glm::vec3(0.0,0.0,-1.0);
   VRP = glm::vec3(0.0,0.0,0.0);
-  UP = glm::vec3(-1.0,0.0,0.0);
+  UP = glm::vec3(1.0,0.0,0.0);
   viewTransform();
   projectTransform();
 }
