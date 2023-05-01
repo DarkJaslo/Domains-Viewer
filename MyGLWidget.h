@@ -66,6 +66,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLint width, height;
 
     // camera
+    float ra;
     GLfloat left,right,up,down,znear,zfar;
     glm::vec3 OBS,VRP,UP; 
     

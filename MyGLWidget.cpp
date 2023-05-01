@@ -44,7 +44,7 @@ void MyGLWidget::paintGL ()
   for(int i = 0; i < rows; ++i){
     for(int j = 0; j < cols; ++j){
       Square sq = boards[currentRound][i][j];
-      glm::vec3 pos(i,j,0);
+      glm::vec3 pos(i-rows/2,j-cols/2,0);
       if(sq.painter == -1){
         paintSquare(pos,white);
       }
@@ -77,6 +77,8 @@ void MyGLWidget::resizeGL (int w, int h)
   width = w;
   height = h;
 #endif
+  ra = float(w)/float(h);
+  projectTransform();
 }
 
 void MyGLWidget::keyPressEvent(QKeyEvent* event)
@@ -124,19 +126,32 @@ void MyGLWidget::viewTransform()
 
 void MyGLWidget::projectTransform()
 {
-  glm::mat4 Proj = glm::ortho(left,right,up,down,znear,zfar);
+  float l = left;
+  float r = right;
+  float u = up;
+  float d = down;
+
+  if(ra > 1){
+    r*=ra;
+    l*=ra;
+  }
+  if(ra < 1){
+    d/=ra;
+    u/=ra;
+  }
+  glm::mat4 Proj = glm::ortho(l,r,d,u,znear,zfar);
   glUniformMatrix4fv(projLoc,1,GL_FALSE,&Proj[0][0]);
 }
 
 void MyGLWidget::iniCamera()
 {
-  left = 0.0;  right = 50.0;
-  up = 0.0;  down = 50.0;
+  left = -25.0;  right = 25.0;
+  up = -25.0;  down = 25.0;
   znear = 0.1;  zfar = 1.1;
   //OBS = glm::vec3(25.0,25.0,1.0);
-  OBS = glm::vec3(50.0,0.0,1.0);
+  OBS = glm::vec3(0.0,0.0,1.0);
   //VRP = glm::vec3(25.0,25.0,0.0);
-  VRP = glm::vec3(50.0,0.0,0.0);
+  VRP = glm::vec3(0.0,0.0,0.0);
   UP = glm::vec3(-1.0,0.0,0.0);
   viewTransform();
   projectTransform();
