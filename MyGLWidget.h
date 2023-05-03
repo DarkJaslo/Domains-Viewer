@@ -36,6 +36,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void createBuffersDrawing();
     void createBuffersSquare();
     void createBuffersPlayer();
+    void createBuffersBonus();
+    void createBuffersBubble();
     
     void loadShaders();
 
@@ -47,6 +49,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void modelTransformPlayer(glm::vec3 pos);
     void paintSquare(glm::vec3 pos, glm::vec4 color);
     void paintPlayer(glm::vec3 pos, glm::vec4 color);
+    void paintBonus(glm::vec3 pos, glm::vec4 color);
+    void paintBubble(glm::vec3 pos, glm::vec4 color);
     
     // program
     QOpenGLShaderProgram *program;
@@ -60,7 +64,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLuint viewLoc;
 
     // VAOs
-    GLuint VAODrawing,VAOSquare,VAOPlayer;
+    GLuint VAODrawing,VAOSquare,VAOPlayer,VAOBonus,VAOBubble;
 
     // viewport
     GLint width, height;
