@@ -59,7 +59,9 @@ void MyGLWidget::paintGL ()
       }
 
       if(sq.unit != -1){
-        paintPlayer(pos,glm::vec4(colors[sq.unit],1.0f));
+        if(sq.unit < 10) paintPlayer(pos,glm::vec4(colors[sq.unit],1.0f));
+        else if(sq.unit >= 10 and sq.unit < 59) paintBubble(pos,glm::vec4(colors[(sq.unit-10)/10],1.0f));
+        else paintBonus(pos,glm::vec4(glm::vec3(200.0f,0.0f,0.0f),1.0f));
       }
       
     }
