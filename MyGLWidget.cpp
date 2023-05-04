@@ -1,4 +1,5 @@
 #include "MyGLWidget.h"
+#include "Encoding.h"
 
 #include <iostream>
 
@@ -62,12 +63,21 @@ void MyGLWidget::paintGL ()
         paintSquare(pos,glm::vec4(colors[sq.drawer],0.4f));
       }
 
-      if(sq.unit != -1){
-        if(sq.unit < 10) paintPlayer(pos,glm::vec4(playerColors[sq.unit],1.0f));
-        else if(sq.unit >= 10 and sq.unit < 59) paintBubble(pos,glm::vec4(playerColors[(sq.unit-10)/10],1.0f));
-        else paintBonus(pos,glm::vec4(glm::vec3(200.0f,0.0f,0.0f),1.0f));
+      if(sq.unit < UnitCodes::NOTHING){
+        if(sq.unit >= UnitCodes::OWN0 and sq.unit <= UnitCodes::OWN3){
+          paintPlayer(pos,glm::vec4(playerColors[sq.unit-UnitCodes::OWN0],1.0f));
+        }
+        else if(sq.unit >= UnitCodes::OWN0UP and sq.unit <= UnitCodes::OWN3UP){
+          //paint upgraded player
+          paintPlayer(pos,glm::vec4(playerColors[sq.unit-UnitCodes::OWN0UP],1.0f));
+        }
+        else if(sq.unit >= UnitCodes::BUBBLE0 and sq.unit <= UnitCodes::BUBBLE3){
+          paintBubble(pos,glm::vec4(playerColors[sq.unit-UnitCodes::BUBBLE0],1.0f));
+        }
+        else if(sq.unit == UnitCodes::BONUS){
+          paintBonus(pos,glm::vec4(glm::vec3(200.0f,0.0f,0.0f),1.0f));
+        }
       }
-      
     }
   }
   glBindVertexArray(0);
@@ -116,6 +126,76 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
   update();
 }
 
+void MyGLWidget::deencodeSq(int c, int& painter, int& drawer){
+  if(c == SquareCodes::EMPTY){
+    painter = -1; drawer = -1;
+  }
+  else if(c >= SquareCodes::PAINT0 and c <= SquareCodes::PAINT3){
+    painter = c-SquareCodes::PAINT0;
+    drawer = -1;
+  }
+  else if(c >= SquareCodes::DRAW0 and c <= SquareCodes::DRAW3){
+    painter = -1;
+    drawer = c-SquareCodes::DRAW0;
+  }
+  else{
+    switch (c)
+    {
+    case SquareCodes::P0D1:
+      painter = 0;
+      drawer = 1;
+      break;
+    case SquareCodes::P0D2:
+      painter = 0;
+      drawer = 2;
+      break;
+    case SquareCodes::P0D3:
+      painter = 0;
+      drawer = 3;
+      break;
+    case SquareCodes::P1D0:
+      painter = 1;
+      drawer = 0;
+      break;
+    case SquareCodes::P1D2:
+      painter = 1;
+      drawer = 2;
+      break;
+    case SquareCodes::P1D3:
+      painter = 1;
+      drawer = 3;
+      break;
+    case SquareCodes::P2D0:
+      painter = 2;
+      drawer = 0;
+      break;
+    case SquareCodes::P2D1:
+      painter = 2;
+      drawer = 1;
+      break;
+    case SquareCodes::P2D3:
+      painter = 2;
+      drawer = 3;
+      break;
+    case SquareCodes::P3D0:
+      painter = 3;
+      drawer = 0;
+      break;
+    case SquareCodes::P3D1:
+      painter = 3;
+      drawer = 1;
+      break;
+    case SquareCodes::P3D2:
+      painter = 3;
+      drawer = 2;
+      break;
+    
+    default:
+      break;
+    }
+  }
+}
+
 void MyGLWidget::readBoards()
 {
   cin >> rounds >> rows >> cols;
@@ -131,7 +211,11 @@ void MyGLWidget::readBoards()
     }*/
     for(int j = 0; j < rows; ++j){
       for(int k = 0; k < cols; ++k){
-        cin >> boards[i][j][k].painter >> boards[i][j][k].drawer >> boards[i][j][k].unit;
+        char s,u;
+        cin >> s >> u;
+        s-='!'; u-='!';
+        deencodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer);
+        boards[i][j][k].unit = u;
       }
     }
   }
