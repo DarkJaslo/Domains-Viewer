@@ -19,5 +19,5 @@ void printVert(int ntr, double R, float orgX, float orgY, int start){
 }
 
 int main(){
-  printVert(36,0.4,0.5,0.5,0);
+  printVert(36,0.35,0.5,0.5,0);
 }
