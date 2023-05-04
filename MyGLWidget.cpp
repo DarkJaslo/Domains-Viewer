@@ -23,7 +23,8 @@ void MyGLWidget::initializeGL ()
   glEnable (GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  glClearColor (0.0, 0.0, 0.0, 1.0); // background color (black)
+  //glClearColor (0.0, 0.0, 0.0, 1.0); // background color (black)
+  glClearColor(80.0f/255.0f,80.0f/255.0f,80.0f/255.0f,1.0);
 
   loadShaders();
   createBuffersSquare();
@@ -60,14 +61,16 @@ void MyGLWidget::paintGL ()
       Square sq = boards[currentRound][i][j];
       glm::vec3 pos(i-rows/2,j-cols/2,0);
       if(sq.painter == -1){
-        paintSquare(pos,white);
+        paintSquare(pos,glm::vec4(30.0f/255.0f,30.0f/255.0f,30.0f/255.0f,1.0f));
+        //paintSquare(pos,white);
       }
       else{
         paintSquare(pos,glm::vec4(colors[sq.painter],1.0f));
       }
 
       if(sq.drawer != -1){
-        paintSquare(pos,glm::vec4(colors[sq.drawer],0.4f));
+        paintSquare(pos,glm::vec4(1.0f,1.0f,1.0f,1.0f));
+        paintSquare(pos,glm::vec4(colors[sq.drawer],0.5f));
       }
 
       if(sq.unit < UnitCodes::NOTHING){
