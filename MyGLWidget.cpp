@@ -1,5 +1,5 @@
 #include "MyGLWidget.h"
-#include "Encoding.h"
+#include "Encoding.hh"
 
 #include <iostream>
 
