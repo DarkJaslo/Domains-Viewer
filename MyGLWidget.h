@@ -76,8 +76,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     
     // colors
     glm::vec3 colors[4] = {
-      glm::vec3(255.0f  /255.0f,  105.0f  /255.0f,  180.0f  /255.0f), //pink
-      glm::vec3(200.0f  /255.0f,  162.0f  /255.0f,  200.0f  /255.0f), //purple
+      glm::vec3(255.0f  /255.0f,  105.0f  /255.0f,  180.0f  /255.0f),   //pink
+      glm::vec3(200.0f  /255.0f,  162.0f  /255.0f,  200.0f  /255.0f),   //purple
       glm::vec3(255.0f  /255.0f,  215.0f  /255.0f,    0.0f  /255.0f),   //yellow
       glm::vec3(  0.0f  /255.0f,  255.0f  /255.0f,  255.0f  /255.0f)    //cyan
     };
