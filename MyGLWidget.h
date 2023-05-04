@@ -4,6 +4,7 @@
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
 #include <QKeyEvent>
+#include <QTimer>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 using namespace std;
@@ -15,6 +16,16 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
   public:
     MyGLWidget (QWidget *parent=0);
     ~MyGLWidget ();
+
+  public slots:
+    void setRound(int r);
+    void autoAdvanceAnimation();
+    void toggleAnimation(bool b);
+
+  signals:
+    void roundChanged(int r);
+    void maxRounds(int m);
+    void animationToggle();
     
   protected:
     // initializeGL - Is executed once at the beggining
@@ -92,6 +103,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec4 black = glm::vec4(0.0f,0.0f,0.0f,1.0f);
 
     //control
+    bool autoAdvance;
+    QTimer timer;
+    int speed;
     int rounds,cols,rows;
     int currentRound;
     struct Square{

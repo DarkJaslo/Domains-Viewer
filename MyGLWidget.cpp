@@ -35,6 +35,10 @@ void MyGLWidget::initializeGL ()
 
   readBoards();
   currentRound = 0;
+  speed = 250;
+  autoAdvance = false;
+  toggleAnimation(true);
+  connect(&timer,SIGNAL(timeout()),this,SLOT(autoAdvanceAnimation()));
 }
 
 void MyGLWidget::paintGL ()
@@ -90,11 +94,21 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
   makeCurrent();
   switch (event->key()) {
     case Qt::Key_Left:{
-      if(currentRound > 0) --currentRound;
+      if(currentRound > 0){
+        --currentRound;
+        roundChanged(currentRound);
+      }
       break;
     }
     case Qt::Key_Right:{
-      if(currentRound < rounds-1) ++currentRound;
+      if(currentRound < rounds-1){
+        ++currentRound;
+        roundChanged(currentRound);
+      }
+      break;
+    }
+    case Qt::Key_Space:{
+      toggleAnimation(true);
       break;
     }
     default: event->ignore(); break;
@@ -106,6 +120,7 @@ void MyGLWidget::readBoards()
 {
   cin >> rounds >> rows >> cols;
   ++rounds;
+  maxRounds(rounds);
   boards = vector<vector<vector<Square>>>(rounds,vector<vector<Square>>(rows,vector<Square>(cols)));
   for(int i = 0; i < rounds; ++i){
     int r;
@@ -473,4 +488,38 @@ void MyGLWidget::loadShaders()
   viewLoc = glGetUniformLocation(program->programId(), "View");
   projLoc = glGetUniformLocation(program->programId(), "Proj");
   glUniform1f(sclLoc, 1.0f);
+}
+
+void MyGLWidget::setRound(int r){
+  makeCurrent();
+  currentRound = r;
+  roundChanged(r);
+  update();
+}
+
+void MyGLWidget::autoAdvanceAnimation(){
+  makeCurrent();
+
+  if(currentRound < rounds-1){
+    ++currentRound;
+    roundChanged(currentRound);
+  }
+  else{
+    toggleAnimation(true);
+  }
+
+  update();
+}
+
+void MyGLWidget::toggleAnimation(bool b){
+  makeCurrent();
+  animationToggle();
+  autoAdvance = not autoAdvance;
+  if(autoAdvance){
+    timer.start(speed);
+  }
+  else{
+    timer.stop();
+  }
+  update();
 }
