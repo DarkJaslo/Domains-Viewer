@@ -23,9 +23,23 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void toggleAnimation(bool b);
 
   signals:
+    void init();
     void roundChanged(int r);
     void maxRounds(int m);
     void animationToggle();
+    void enablePl1();
+    void enablePl2();
+    void enablePl3();
+    void enablePl4();
+    void textLabel1(const QString& s);
+    void textLabel2(const QString& s);
+    void textLabel3(const QString& s);
+    void textLabel4(const QString& s);
+    void numLabel1(int n);
+    void numLabel2(int n);
+    void numLabel3(int n);
+    void numLabel4(int n);
+    
     
   protected:
     // initializeGL - Is executed once at the beggining
@@ -43,6 +57,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
   private:
 
     void deencodeSq(int c, int& painter, int& drawer);
+    void enablePl(int pl);
     void readBoards();
 
     void createBuffersDrawing();
@@ -104,6 +119,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec4 black = glm::vec4(0.0f,0.0f,0.0f,1.0f);
 
     //control
+    int nplayers;
     bool autoAdvance;
     QTimer timer;
     int speed;
@@ -115,4 +131,6 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
       int unit;
     };
     vector<vector<vector<Square>>> boards;
+    vector<vector<int>> points;
+    vector<string> names;
 };

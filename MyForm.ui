@@ -725,6 +725,125 @@
       </layout>
      </item>
      <item>
+      <widget class="QLabel" name="pl1">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl1sc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>13</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl2sc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>13</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl3sc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>13</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pl4sc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -732,7 +851,7 @@
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>718</height>
+         <height>458</height>
         </size>
        </property>
       </spacer>
@@ -792,6 +911,19 @@
     <signal>roundChanged(int)</signal>
     <signal>maxRounds(int)</signal>
     <signal>animationToggle()</signal>
+    <signal>enablePl1()</signal>
+    <signal>enablePl2()</signal>
+    <signal>enablePl3()</signal>
+    <signal>enablePl4()</signal>
+    <signal>textLabel2(QString)</signal>
+    <signal>textLabel3(QString)</signal>
+    <signal>textLabel4(QString)</signal>
+    <signal>textLabel1(QString)</signal>
+    <signal>numLabel1(int)</signal>
+    <signal>numLabel2(int)</signal>
+    <signal>numLabel3(int)</signal>
+    <signal>numLabel4(int)</signal>
+    <signal>init()</signal>
     <slot>setRound(int)</slot>
     <slot>toggleAnimation(bool)</slot>
    </slots>
@@ -806,12 +938,12 @@
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>136</x>
-     <y>40</y>
+     <x>254</x>
+     <y>81</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>81</y>
+     <x>65</x>
+     <y>90</y>
     </hint>
    </hints>
   </connection>
@@ -826,8 +958,8 @@
      <y>59</y>
     </hint>
     <hint type="destinationlabel">
-     <x>386</x>
-     <y>11</y>
+     <x>607</x>
+     <y>26</y>
     </hint>
    </hints>
   </connection>
@@ -838,8 +970,8 @@
    <slot>setRound(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>537</x>
-     <y>11</y>
+     <x>616</x>
+     <y>26</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
@@ -892,6 +1024,390 @@
     <hint type="destinationlabel">
      <x>121</x>
      <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl1()</signal>
+   <receiver>pl1</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>123</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl1()</signal>
+   <receiver>pl1sc</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl2()</signal>
+   <receiver>pl2</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl2()</signal>
+   <receiver>pl2sc</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>73</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl3()</signal>
+   <receiver>pl3</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl3()</signal>
+   <receiver>pl3sc</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>68</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl4()</signal>
+   <receiver>pl4</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>enablePl4()</signal>
+   <receiver>pl4sc</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>textLabel1(QString)</signal>
+   <receiver>pl1</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>numLabel1(int)</signal>
+   <receiver>pl1sc</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>222</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>131</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>textLabel2(QString)</signal>
+   <receiver>pl2</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>233</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>numLabel2(int)</signal>
+   <receiver>pl2sc</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>67</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>textLabel3(QString)</signal>
+   <receiver>pl3</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>233</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>numLabel3(int)</signal>
+   <receiver>pl3sc</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>textLabel4(QString)</signal>
+   <receiver>pl4</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>238</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>numLabel4(int)</signal>
+   <receiver>pl4sc</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl1</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>24</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl1sc</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>312</x>
+     <y>134</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>83</x>
+     <y>133</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl2</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl2sc</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>51</x>
+     <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl3</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>90</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl3sc</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl4</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>init()</signal>
+   <receiver>pl4sc</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>100</x>
+     <y>351</y>
     </hint>
    </hints>
   </connection>

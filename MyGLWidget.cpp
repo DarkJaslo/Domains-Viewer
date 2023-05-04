@@ -33,7 +33,7 @@ void MyGLWidget::initializeGL ()
   createBuffersBubble();
 
   iniCamera();
-
+  init();
   readBoards();
   currentRound = 0;
   speed = 250;
@@ -47,6 +47,13 @@ void MyGLWidget::paintGL ()
 //  glViewport (0, 0, width, height);
   
   glClear (GL_COLOR_BUFFER_BIT);  // Erase frame-buffer
+
+  numLabel1(points[currentRound][0]);
+  numLabel2(points[currentRound][1]);
+  if(nplayers >= 3){
+    numLabel3(points[currentRound][2]);
+    if(nplayers == 4) numLabel4(points[currentRound][3]);
+  }
 
   for(int i = 0; i < rows; ++i){
     for(int j = 0; j < cols; ++j){
@@ -199,12 +206,26 @@ void MyGLWidget::deencodeSq(int c, int& painter, int& drawer){
 void MyGLWidget::readBoards()
 {
   cin >> rounds >> rows >> cols;
+  cin >> nplayers;
+  names = vector<string>(nplayers);
+  for(string& s : names) cin >> s;
+  
+  enablePl(1);
+  enablePl(2);
+  if(nplayers >= 3) enablePl(3);
+  if(nplayers == 4) enablePl(4);
+
   ++rounds;
   maxRounds(rounds);
+
   boards = vector<vector<vector<Square>>>(rounds,vector<vector<Square>>(rows,vector<Square>(cols)));
+  points = vector<vector<int>>(rounds,vector<int>(nplayers,0));
   for(int i = 0; i < rounds; ++i){
     int r;
     cin >> r;
+    for(int pts = 0; pts < points[r].size(); ++pts){
+      cin >> points[r+1][pts];
+    }
     /*if(r != i){
       cerr << "Incorrect input round: expected " << i << " and got " << r << endl;
       exit(1); 
@@ -606,4 +627,27 @@ void MyGLWidget::toggleAnimation(bool b){
     timer.stop();
   }
   update();
+}
+
+void MyGLWidget::enablePl(int pl){
+  if(pl == 1){
+    enablePl1();
+    textLabel1(QString::fromStdString(names[pl-1]));
+    numLabel1(0);
+  }
+  if(pl == 2){
+    enablePl2();
+    textLabel2(QString::fromStdString(names[pl-1]));
+    numLabel2(0);
+  }
+  if(pl == 3){
+    enablePl3();
+    textLabel3(QString::fromStdString(names[pl-1]));
+    numLabel3(0);
+  }
+  if(pl == 4){
+    enablePl4();
+    textLabel4(QString::fromStdString(names[pl-1]));
+    numLabel4(0);
+  }
 }
