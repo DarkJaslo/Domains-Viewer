@@ -70,7 +70,10 @@ void MyGLWidget::paintGL ()
 
       if(sq.drawer != -1){
         paintSquare(pos,glm::vec4(1.0f,1.0f,1.0f,1.0f));
-        paintSquare(pos,glm::vec4(colors[sq.drawer],0.5f));
+        if(sq.drawer == 3){
+          paintSquare(pos,glm::vec4(colors[sq.drawer],0.2f));
+        }
+        else paintSquare(pos,glm::vec4(colors[sq.drawer],0.5f));
       }
 
       if(sq.unit < UnitCodes::NOTHING){
