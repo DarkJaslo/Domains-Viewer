@@ -37,7 +37,7 @@ void MyGLWidget::initializeGL ()
   init();
   readBoards();
   currentRound = 0;
-  speed = 250;
+  speed = 100;
   autoAdvance = false;
   toggleAnimation(true);
   connect(&timer,SIGNAL(timeout()),this,SLOT(autoAdvanceAnimation()));
