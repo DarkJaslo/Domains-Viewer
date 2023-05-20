@@ -1,0 +1,13 @@
+.qmake.stash
+MyGLWidget.cpp
+Makefile
+main.o
+moc_MyForm.cpp
+moc_MyGLWidget.cpp
+moc_MyForm.o
+moc_MyGLWidget.o
+moc_predefs.h
+ui_MyForm.h
+MyGLWidget.o
+Viewer
+MyForm.o
