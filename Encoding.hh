@@ -2,6 +2,7 @@ enum SquareCodes {
   EMPTY,
 
   PAINT0, PAINT1, PAINT2, PAINT3,
+  ABILITY0, ABILITY1, ABILITY2, ABILITY3,
   DRAW0,  DRAW1,  DRAW2,  DRAW3,
   
   P0D1,   P0D2,   P0D3,
@@ -14,7 +15,7 @@ enum SquareCodes {
 
 //Takes in the drawer and the painter of a square
 //Returns the code that represents such square
-char sqcode(int dr, int pt){
+char sqcode(int dr, int pt, bool ability){
   switch(pt){
     case -1:{
       switch(dr){
@@ -27,6 +28,7 @@ char sqcode(int dr, int pt){
     }
     }
     case 0:{
+      if(ability) return SquareCodes::ABILITY0;
       switch(dr){
         case -1:{return '!'+SquareCodes::PAINT0; break;}
         case 1:{return '!'+SquareCodes::P0D1; break;}
@@ -36,6 +38,7 @@ char sqcode(int dr, int pt){
       }
     }
     case 1:{
+      if(ability) return SquareCodes::ABILITY1;
       switch(dr){
         case -1:{return '!'+SquareCodes::PAINT1; break;}
         case 0:{return '!'+SquareCodes::P1D0; break;}
@@ -45,6 +48,7 @@ char sqcode(int dr, int pt){
       }
     }
     case 2:{
+      if(ability) return SquareCodes::ABILITY2;
       switch(dr){
         case -1:{return '!'+SquareCodes::PAINT2; break;}
         case 0:{return '!'+SquareCodes::P2D0; break;}
@@ -54,6 +58,7 @@ char sqcode(int dr, int pt){
       }
     }
     case 3:{
+      if(ability) return SquareCodes::ABILITY3;
       switch(dr){
         case -1:{return '!'+SquareCodes::PAINT3; break;}
         case 0:{return '!'+SquareCodes::P3D0; break;}

@@ -65,7 +65,12 @@ void MyGLWidget::paintGL ()
         //paintSquare(pos,white);
       }
       else{
-        paintSquare(pos,glm::vec4(colors[sq.painter],1.0f));
+        if(sq.ability){
+          paintSquare(pos,glm::vec4(abilityColors[sq.painter],1.0f));
+        }
+        else{
+          paintSquare(pos,glm::vec4(colors[sq.painter],1.0f));
+        }
       }
 
       if(sq.drawer != -1){
@@ -139,7 +144,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
   update();
 }
 
-void MyGLWidget::deencodeSq(int c, int& painter, int& drawer){
+void MyGLWidget::deencodeSq(int c, int& painter, int& drawer, bool& ability){
+  ability = false;
   if(c == SquareCodes::EMPTY){
     painter = -1; drawer = -1;
   }
@@ -150,6 +156,11 @@ void MyGLWidget::deencodeSq(int c, int& painter, int& drawer){
   else if(c >= SquareCodes::DRAW0 and c <= SquareCodes::DRAW3){
     painter = -1;
     drawer = c-SquareCodes::DRAW0;
+  }
+  else if(c >= SquareCodes::ABILITY0 and c <= SquareCodes::ABILITY3){
+    painter = c-SquareCodes::ABILITY0;
+    drawer = -1;
+    ability = true;
   }
   else{
     switch (c)
@@ -241,7 +252,7 @@ void MyGLWidget::readBoards()
         char s,u;
         cin >> s >> u;
         s-='!'; u-='!';
-        deencodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer);
+        deencodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer,boards[i][j][k].ability);
         boards[i][j][k].unit = u;
       }
     }
