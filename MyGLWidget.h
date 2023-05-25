@@ -104,23 +104,24 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     // colors
     glm::vec3 colors[4] = {
       glm::vec3(255.0f  /255.0f,  105.0f  /255.0f,  180.0f  /255.0f),   //pink
-      glm::vec3(200.0f  /255.0f,  162.0f  /255.0f,  200.0f  /255.0f),   //purple
+      glm::vec3(203.0f  /255.0f,  114.0f  /255.0f,  244.0f  /255.0f),   //purple
       glm::vec3(255.0f  /255.0f,  215.0f  /255.0f,    0.0f  /255.0f),   //yellow
-      glm::vec3(  0.0f  /255.0f,  255.0f  /255.0f,  255.0f  /255.0f)    //cyan
+      glm::vec3( 44.0f  /255.0f,  237.0f  /255.0f,  236.0f  /255.0f)    //cyan
     };
 
     glm::vec3 abilityColors[4] = {
-      glm::vec3(255.0f  /255.0f,  0.0f  /255.0f,  0.0f  /255.0f),   //pink
-      glm::vec3(61.0f  /255.0f,  51.0f  /255.0f,  61.0f  /255.0f),   //purple
-      glm::vec3(255.0f  /255.0f,  215.0f  /255.0f,    0.0f  /255.0f),   //yellow
-      glm::vec3(  0.0f  /255.0f,  255.0f  /255.0f,  255.0f  /255.0f)    //cyan
+      glm::vec3(255.0f  /255.0f, 43.0f  /255.0f,  127.0f  /255.0f),   //pink
+      glm::vec3(161.0f  /255.0f,  50.0f  /255.0f,  233.0f  /255.0f),   //purple
+      glm::vec3(255.0f  /255.0f,  180.0f  /255.0f,    0.0f  /255.0f),   //yellow
+      glm::vec3(  0.0f  /255.0f,  213.0f  /255.0f,  214.0f  /255.0f)    //cyan
     };
 
     glm::vec3 playerColors[4]{
-      glm::vec3(128.0f /255.0f,   52.0f /255.0f,   90.0f  /255.0f), //darker pink
-      glm::vec3(102.0f /255.0f,   83.0f /255.0f,  102.0f  /255.0f), //darker purple
-      glm::vec3(154.0f /255.0f,  133.0f /255.0f,    0.0f  /255.0f), //darker yellow
-      glm::vec3(  0.0f /255.0f,  132.0f /255.0f,  132.0f  /255.0f)  //darker cyan
+      glm::vec3(151.0f /255.0f,   0.0f /255.0f,   58.0f  /255.0f), //darker pink
+      glm::vec3(97.0f /255.0f,   0.0f /255.0f,  148.0f  /255.0f), //darker purple
+      //glm::vec3(147.0f /255.0f,  99.0f /255.0f,    0.0f  /255.0f), //darker yellow
+      glm::vec3(188.0f /255.0f,  86.0f /255.0f,    0.0f  /255.0f), //darker yellow
+      glm::vec3(  0.0f /255.0f,  122.0f /255.0f,  123.0f  /255.0f)  //darker cyan
     };
     glm::vec4 white = glm::vec4(1.0f,1.0f,1.0f,1.0f);
     glm::vec4 black = glm::vec4(0.0f,0.0f,0.0f,1.0f);
