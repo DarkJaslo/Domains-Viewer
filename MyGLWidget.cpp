@@ -1,6 +1,5 @@
 #include "MyGLWidget.h"
 #include "Encoding.hh"
-
 #include <iostream>
 
 MyGLWidget::MyGLWidget (QWidget* parent) : QOpenGLWidget(parent), program(NULL)
