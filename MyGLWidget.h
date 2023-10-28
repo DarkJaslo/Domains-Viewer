@@ -56,7 +56,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 
   private:
 
-    void deencodeSq(int c, int& painter, int& drawer, bool& ability);
+    void decodeSq(int c, int& painter, int& drawer, bool& ability);
     void enablePl(int pl);
     void readBoards();
 

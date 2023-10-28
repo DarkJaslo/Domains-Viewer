@@ -55,43 +55,61 @@ void MyGLWidget::paintGL ()
     if(nplayers == 4) numLabel4(points[currentRound][3]);
   }
 
-  for(int i = 0; i < rows; ++i){
-    for(int j = 0; j < cols; ++j){
+  for(int i = 0; i < rows; ++i)
+  {
+    for(int j = 0; j < cols; ++j)
+    {
       Square sq = boards[currentRound][i][j];
       glm::vec3 pos(i-rows/2,j-cols/2,0);
+
+      //Square is not painted
       if(sq.painter == -1){
         paintSquare(pos,glm::vec4(30.0f/255.0f,30.0f/255.0f,30.0f/255.0f,1.0f));
         //paintSquare(pos,white);
       }
-      else{
-        if(sq.ability){
+      else //Square is painted
+      {
+        if(sq.ability) //Square is an ability
+        {
           paintSquare(pos,glm::vec4(abilityColors[sq.painter],1.0f));
         }
-        else{
+        else //It is not
+        {
           paintSquare(pos,glm::vec4(colors[sq.painter],1.0f));
         }
       }
 
-      if(sq.drawer != -1){
+      if(sq.drawer != -1) //Square is drawn
+      {
+        //Paint white
         paintSquare(pos,glm::vec4(1.0f,1.0f,1.0f,1.0f));
-        if(sq.drawer == 3){
+        //Use alpha to paint the player color on top of it
+
+        if(sq.drawer == 3) //Cyan
+        {
           paintSquare(pos,glm::vec4(colors[sq.drawer],0.2f));
         }
         else paintSquare(pos,glm::vec4(colors[sq.drawer],0.5f));
       }
 
-      if(sq.unit < UnitCodes::NOTHING){
-        if(sq.unit >= UnitCodes::OWN0 and sq.unit <= UnitCodes::OWN3){
+      if(sq.unit < UnitCodes::NOTHING)
+      {
+        if(sq.unit >= UnitCodes::OWN0 and sq.unit <= UnitCodes::OWN3)
+        {
+          //paint normal player
           paintPlayer(pos,glm::vec4(playerColors[sq.unit-UnitCodes::OWN0],1.0f));
         }
-        else if(sq.unit >= UnitCodes::OWN0UP and sq.unit <= UnitCodes::OWN3UP){
+        else if(sq.unit >= UnitCodes::OWN0UP and sq.unit <= UnitCodes::OWN3UP)
+        {
           //paint upgraded player
           paintPlayer(pos,glm::vec4(playerColors[sq.unit-UnitCodes::OWN0UP],1.0f));
         }
-        else if(sq.unit >= UnitCodes::BUBBLE0 and sq.unit <= UnitCodes::BUBBLE3){
+        else if(sq.unit >= UnitCodes::BUBBLE0 and sq.unit <= UnitCodes::BUBBLE3)
+        {
           paintBubble(pos,glm::vec4(playerColors[sq.unit-UnitCodes::BUBBLE0],1.0f));
         }
-        else if(sq.unit == UnitCodes::BONUS){
+        else if(sq.unit == UnitCodes::BONUS)
+        {
           paintBonus(pos,glm::vec4(glm::vec3(200.0f,0.0f,0.0f),1.0f));
         }
       }
@@ -143,7 +161,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
   update();
 }
 
-void MyGLWidget::deencodeSq(int c, int& painter, int& drawer, bool& ability){
+void MyGLWidget::decodeSq(int c, int& painter, int& drawer, bool& ability)
+{
   ability = false;
   if(c == SquareCodes::EMPTY){
     painter = -1; drawer = -1;
@@ -161,7 +180,7 @@ void MyGLWidget::deencodeSq(int c, int& painter, int& drawer, bool& ability){
     drawer = -1;
     ability = true;
   }
-  else{
+  else{ //Owned squares drawn by others
     switch (c)
     {
     case SquareCodes::P0D1:
@@ -251,7 +270,7 @@ void MyGLWidget::readBoards()
         char s,u;
         cin >> s >> u;
         s-='!'; u-='!';
-        deencodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer,boards[i][j][k].ability);
+        decodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer,boards[i][j][k].ability);
         boards[i][j][k].unit = u;
       }
     }
@@ -393,7 +412,8 @@ void MyGLWidget::createBuffersSquare()
   glBindVertexArray(0);
 }
 
-void MyGLWidget::createBuffersPlayer(){
+void MyGLWidget::createBuffersPlayer()
+{
   glm::vec3 Vertices[6];
   Vertices[0] = glm::vec3(0.2f, 0.2f, 0.0f);
   Vertices[1] = glm::vec3(0.8f, 0.2f, 0.0f);
@@ -417,7 +437,8 @@ void MyGLWidget::createBuffersPlayer(){
   glBindVertexArray(0);
 }
 
-void MyGLWidget::createBuffersBonus(){
+void MyGLWidget::createBuffersBonus()
+{
   glm::vec3 Vertices[18];
   Vertices[0] =  glm::vec3(0.4,0.2,0.0);
   Vertices[1] =  glm::vec3(0.6,0.2,0.0);
@@ -453,7 +474,8 @@ void MyGLWidget::createBuffersBonus(){
   glBindVertexArray(0);
 }
 
-void MyGLWidget::createBuffersBubble(){
+void MyGLWidget::createBuffersBubble()
+{
   glm::vec3 Vertices[108];
   Vertices[0] =  glm::vec3(0.5f,0.5f,0.0f);
   Vertices[1] =  glm::vec3(0.85f,0.5f,0.0f);
@@ -564,8 +586,6 @@ void MyGLWidget::createBuffersBubble(){
   Vertices[106] = glm::vec3(0.844683f,0.439223f,0.0f);
   Vertices[107] = glm::vec3(0.85f,0.5f,0.0f);
 
-
-
   // Creating VAO
   glGenVertexArrays(1, &VAOBubble);
   glBindVertexArray(VAOBubble);
@@ -611,14 +631,16 @@ void MyGLWidget::loadShaders()
   glUniform1f(sclLoc, 1.0f);
 }
 
-void MyGLWidget::setRound(int r){
+void MyGLWidget::setRound(int r)
+{
   makeCurrent();
   currentRound = r;
   roundChanged(r);
   update();
 }
 
-void MyGLWidget::autoAdvanceAnimation(){
+void MyGLWidget::autoAdvanceAnimation()
+{
   makeCurrent();
 
   if(currentRound < rounds-1){
@@ -632,7 +654,8 @@ void MyGLWidget::autoAdvanceAnimation(){
   update();
 }
 
-void MyGLWidget::toggleAnimation(bool b){
+void MyGLWidget::toggleAnimation(bool b)
+{
   makeCurrent();
   animationToggle();
   autoAdvance = not autoAdvance;
@@ -645,7 +668,8 @@ void MyGLWidget::toggleAnimation(bool b){
   update();
 }
 
-void MyGLWidget::enablePl(int pl){
+void MyGLWidget::enablePl(int pl)
+{
   if(pl == 1){
     enablePl1();
     textLabel1(QString::fromStdString(names[pl-1]));
