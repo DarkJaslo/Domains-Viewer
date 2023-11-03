@@ -6,7 +6,7 @@
 
 Welcome! This is the first desktop app I made to watch [Domains](https://github.com/DarkJaslo/Domains) games.
 
-It is quite simple: use the Domains standard output as this program's input (in many consoles, redirecting the input using a .txt file does the work).
+It is quite simple: use the Domains standard output as this program's input (in many consoles, redirecting the input using a .txt file does the work). You can start by trying the <tt>sample_result.txt</tt> included in this repository.
 
 It is a Qt application that uses OpenGL graphics to render the game. Quite the overkill, but funnily enough, it was by far the easiest option for me.
 
