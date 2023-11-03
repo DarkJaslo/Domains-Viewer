@@ -1,5 +1,7 @@
 # Domains-Viewer
 
+<img src="https://raw.githubusercontent.com/DarkJaslo/Domains-Viewer/master/img/img1.PNG" alt="image 1" title = "A game " width="70%" height="70%">
+
 <p> 
 
 Welcome! This is the first desktop app I made to watch [Domains](https://github.com/DarkJaslo/Domains) games.
@@ -8,7 +10,7 @@ It is quite simple: use the Domains standard output as this program's input (in 
 
 It is a Qt application that uses OpenGL graphics to render the game. Quite the overkill, but funnily enough, it was by far the easiest option for me.
 
-User guide:
+## User guide:
 
 -left and right arrows can be used to go a round up or down. This requires being focused on the window, you may need to click on it once
 
