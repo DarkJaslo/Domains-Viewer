@@ -49,7 +49,8 @@ void MyGLWidget::paintGL ()
   glClear (GL_COLOR_BUFFER_BIT);  // Erase frame-buffer
 
   numLabel1(points[currentRound][0]);
-  numLabel2(points[currentRound][1]);
+  if(nplayers >= 2)
+    numLabel2(points[currentRound][1]);
   if(nplayers >= 3){
     numLabel3(points[currentRound][2]);
     if(nplayers == 4) numLabel4(points[currentRound][3]);
@@ -246,7 +247,7 @@ void MyGLWidget::readBoards()
   for(string& s : names) cin >> s;
   
   enablePl(1);
-  enablePl(2);
+  if(nplayers >= 2) enablePl(2);
   if(nplayers >= 3) enablePl(3);
   if(nplayers == 4) enablePl(4);
 
