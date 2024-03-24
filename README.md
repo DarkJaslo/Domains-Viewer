@@ -21,4 +21,4 @@ It is a Qt application that uses OpenGL graphics to render the game. Quite the o
 
 ## Build instructions
 
-This is a Qt Application, so compiling will need both <tt>qmake</tt> and <tt>make</tt>. A release will not be out soon, but a web page that does pretty much the same as this app is!. If you do not want to fight with Qt and building this, you can use the [web viewer](https://github.com/Javier0003/domains-web-viewer) made by [Javier0003](https://github.com/Javier0003) and I. There is directly a page too: https://domains-web-viewer.netlify.app/, but don't hesitate on using the code in the repo should it not work properly.
+This is a Qt Application, so compiling will need both <tt>qmake</tt> and <tt>make</tt>. A release will not be out soon, but a web page that does pretty much the same as this app is! If you do not want to fight with Qt and building this, you can use the [web viewer](https://github.com/Javier0003/domains-web-viewer) made by [Javier0003](https://github.com/Javier0003) and I. There is directly a page too: https://domains-web-viewer.netlify.app/, but don't hesitate on using the code in the repo should it not work properly.
