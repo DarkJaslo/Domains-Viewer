@@ -270,7 +270,7 @@ void MyGLWidget::readBoards()
       for(int k = 0; k < cols; ++k){
         char s,u;
         cin >> s >> u;
-        s-='!'; u-='!';
+        s-=':'; u-=':';
         decodeSq(s,boards[i][j][k].painter,boards[i][j][k].drawer,boards[i][j][k].ability);
         boards[i][j][k].unit = u;
       }
